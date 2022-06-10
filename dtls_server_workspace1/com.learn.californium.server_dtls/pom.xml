@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.learn.californium</groupId>
+	<artifactId>com.learn.californium.server_dtls</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.eclipse.californium</groupId>
+			<artifactId>californium-core</artifactId>
+			<!-- <version>2.6.0</version> -->
+			<version>3.2.0</version>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.30</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.30</version>
+		</dependency>
+
+
+
+
+
+		<!-- dtsl -->
+		<dependency>
+			<groupId>org.eclipse.californium</groupId>
+			<artifactId>scandium</artifactId>
+			<!-- <version>2.6.0</version> -->
+			<version>3.2.0</version>
+		</dependency>
+
+	</dependencies>
+
+
+
+
+	<repositories>
+
+		<repository>
+			<id>repo.eclipse.org</id>
+			<name>Californium Repository - Releases</name>
+			<url>https://repo.eclipse.org/content/repositories/californium-releases/</url>
+		</repository>
+		<repository>
+			<id>repo.eclipse.org</id>
+			<name>Californium Repository - Snapshots</name>
+			<url>https://repo.eclipse.org/content/repositories/californium-snapshots/</url>
+		</repository>
+
+	</repositories>
+
+
+
+
+
+
+
+
+	<properties>
+		<maven.compiler.source>13</maven.compiler.source>
+		<maven.compiler.target>13</maven.compiler.target>
+	</properties>
+</project>
