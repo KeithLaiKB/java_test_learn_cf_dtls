@@ -35,7 +35,7 @@ public class TestMainClient {
 	private final int DEFAULT_PORT = 5684;		//5656
 	private final long DEFAULT_TIMEOUT_NANOS = TimeUnit.MILLISECONDS.toNanos(10000);
 	private final Logger LOG = LoggerFactory.getLogger(TestMainClient.class);
-	private final String addr = "192.168.239.137";
+	private final String addr = "127.0.0.1";		//192.168.239.137
 
 	
 	public static CountDownLatch messageCounter;

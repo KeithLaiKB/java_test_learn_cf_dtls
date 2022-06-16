@@ -135,6 +135,23 @@ public class MyClient {
 		// ca certificate
 		Certificate[] cas= {ca};
 		dtlsConfigBuilder.setCertificateIdentityProvider(new SingleCertificateProvider(prvKey, cas));
+
+		//////////////// add verifier //////////////////
+		boolean useTrustAll = false;
+		StaticNewAdvancedCertificateVerifier.Builder verifierBuilder= StaticNewAdvancedCertificateVerifier.builder();
+		if (useTrustAll==true) {
+			verifierBuilder.setTrustAllCertificates();
+		} 
+		else if (useTrustAll==false) {
+			Certificate[] trustedCertificates = cas;
+			verifierBuilder.setTrustedCertificates(trustedCertificates);
+		}
+		// set all raw public keys
+		verifierBuilder.setTrustAllRPKs();
+		
+		NewAdvancedCertificateVerifier verifier = verifierBuilder.build();
+		dtlsConfigBuilder.setAdvancedCertificateVerifier(verifier);
+		////////////////////////////////////////////////////
 		
 		// other settings
 		dtlsConfigBuilder.setLoggingTag("dtls:" + StringUtil.toString(bindToAddress));
@@ -151,7 +168,8 @@ public class MyClient {
 
 		dtlsConnector.setRawDataReceiver(new MyRawDataChannelImpl(this));
 	}
-	//
+
+	
 	public void setDtlsConnector(DTLSConnector dtlsConnector) {
 		this.dtlsConnector = dtlsConnector;
 	}
@@ -159,7 +177,6 @@ public class MyClient {
 		return dtlsConnector;
 	}
 
-	//
 	public void startConnector() {
 		try {
 			this.dtlsConnector.start();
@@ -167,7 +184,6 @@ public class MyClient {
 			LOG.error("Cannot start connector", e);
 		}
 	}
-	//
 	public int stopConnector() {
 		if (dtlsConnector.isRunning()) {
 			dtlsConnector.destroy();
@@ -175,13 +191,11 @@ public class MyClient {
 		return clientMessageCounter.get();
 	}
 	
-
 	public void startTest(InetSocketAddress peer) {
 		RawData data = RawData.outbound(TestMainClient.payload.getBytes(), new AddressEndpointContext(peer), null, false);
 		dtlsConnector.send(data);
 		System.out.println("client try send message");
 	}
-	
 	
 	public void receive(RawData raw) {
 		TestMainClient.messageCounter.countDown();
